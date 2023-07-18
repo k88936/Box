@@ -39,13 +39,13 @@ public class FileUtil {
     /**
      * 根据文件路径读取byte[] 数组
      */
-    public static byte[] readFileByBytes(String filePath) throws IOException {
-        File file = new File(filePath);
-        if(file.isDirectory()) {
+    public static byte[] readFileByBytes(File file) throws IOException {
+//        File file = new File(filePath);
+        if (file.isDirectory()) {
             return null;
         }
         if (!file.exists()) {
-            throw new FileNotFoundException(filePath);
+            throw new FileNotFoundException();
         } else {
             ByteArrayOutputStream bos = new ByteArrayOutputStream((int) file.length());
             BufferedInputStream in = null;

@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Main-Class: com.kvto.Box
+Class-Path: httpasyncclient-4.0.2.jar jackson-core-2.1.1.jar assertj-cor
+ e-3.9.1.jar junit-4.13.2.jar commons-pool2-2.10.0.jar commons-codec-1.1
+ 1.jar api-explorer-sdk-0.1.0.jar bce-java-sdk-0.10.53.jar httpcore-4.4.
+ 13.jar commons-logging-1.2.jar fastjson2-2.0.19.graal.jar json-20230227
+ .jar asm-9.1.jar hamcrest-core-1.3.jar org.eclipse.paho.client.mqttv3-1
+ .2.0.jar accessors-smart-2.4.7.jar gson-2.10.1.jar flatlaf-3.0.jar fast
+ json2-extension-2.0.19.graal.jar webmagic-extension-0.8.0.jar commons-i
+ o-2.11.0.jar slf4j-api-2.0.5.jar jackson-annotations-2.1.1.jar slf4j-re
+ load4j-2.0.5.jar jnativehook-2.2.2.jar httpclient-4.5.13.jar logback-cl
+ assic-1.1.2.jar log4j-1.2.17.jar json-smart-2.4.7.jar httpcore-nio-4.3.
+ 2.jar json-path-2.7.0.jar guava-17.0.jar jsoup-1.15.3.jar joda-time-2.3
+ .jar jPowerShell-3.1.1.jar xsoup-0.3.6.jar reload4j-1.2.22.jar commons-
+ collections4-4.4.jar jcl-over-slf4j-1.7.7.jar webmagic-core-0.8.0.jar j
+ ackson-databind-2.1.1.jar fastjson-2.0.19.graal.jar jedis-3.7.1.jar com
+ mons-lang3-3.12.0.jar logback-core-1.1.2.jar
+
