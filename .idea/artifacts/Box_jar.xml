@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact name="Box:jar">
+  <artifact build-on-make="true" name="Box:jar">
     <output-path>D:/Box</output-path>
     <root id="root">
       <element id="archive" name="Box.jar">

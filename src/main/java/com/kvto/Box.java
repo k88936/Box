@@ -22,11 +22,14 @@ public class Box extends JFrame {
     Logger logger;
     JTextArea LOG;
 
+    Dimension size;
 
     public Box() {
 
+        setTitle("Box");
 
-        setIconImage(Toolkit.getDefaultToolkit().getImage("logo.png"));
+        size = new Dimension(800, 400);
+
 
         LoggerFactory.resisterLogger(new Logger() {
             @Override
@@ -57,20 +60,19 @@ public class Box extends JFrame {
         this.logger = LoggerFactory.getLogger();
 
         ComputeTimeLeft();
-
+        setSize(size);
         //setIconImage();
-        setTitle("Box");
-        setSize(800, 480);
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // 将窗口居中显示
+        setIconImage(Toolkit.getDefaultToolkit().getImage("logo.png"));
+
 
     }
 
     private void initComponents() {
 
         LOG = new JTextArea();
-        LOG.setText("Box 1.0             " + new Date());
+        LOG.setText("Box 1.0 \t\t\t\t\t\t\t\t\t\t" + new Date());
         LOG.setEditable(false);
         LOG.setLineWrap(true);
         LOG.setBackground(new Color(32, 32, 32));
@@ -264,9 +266,57 @@ public class Box extends JFrame {
         layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(label31).addComponent(checkbox31)).addGap(10).addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(label32).addComponent(checkbox32)));
 
 
+        JPanel Tab4 = new JPanel();
+        layout = new GroupLayout(Tab4);
+        Tab4.setLayout(layout);
+
+        JLabel label41 = new JLabel("最小化最前置");
+        JCheckBox checkbox41 = new JCheckBox(OFF);
+        checkbox41.setSelected(false);
+
+        checkbox41.addItemListener(e -> {
+            Dimension LastSize = this.size;
+            if (checkbox41.isSelected()) {
+                checkbox41.setText(ON);
+                this.setAlwaysOnTop(true);
+                this.setSize(800, 250);
+                LastSize = this.getSize();
+
+            } else {
+                checkbox41.setText(OFF);
+                this.setAlwaysOnTop(false);
+                this.setSize(LastSize);
+            }
+        });
+
+        layout.setHorizontalGroup(layout.createParallelGroup()
+
+                        .addGroup(layout.createSequentialGroup().addGap(10).addComponent(label41).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(checkbox41).addGap(10))
+
+//                .addGroup(layout.createSequentialGroup().addGap(10).addComponent(label3).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(checkbox3).addGap(10))
+//
+//                .addGroup(layout.createSequentialGroup().addGap(10).addComponent(label4).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(button4).addGap(10))
+//
+//                .addGroup(layout.createSequentialGroup().addGap(10).addComponent(label4b).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(button4b).addGap(10))
+//
+//                .addGroup(layout.createSequentialGroup().addGap(10).addComponent(label5).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(button5).addGap(10))
+
+        );
+
+
+        layout.setVerticalGroup(layout.createSequentialGroup()
+
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(label41).addComponent(checkbox41)).addGap(10)
+
+//                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(label32).addComponent(checkbox32))
+
+        );
+
+
         tabbedPane.addTab("Text", Tab2);
         tabbedPane.addTab("Spider", Tab1);
         tabbedPane.addTab("Image", Tab3);
+        tabbedPane.addTab("Setting", Tab4);
 
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
