@@ -92,6 +92,8 @@ class ClipboardRecorder extends Recorder implements Runnable {
 
                         logger.info("Recorded：" + text);
                         Printer.BufferedWrite(text);
+                        logger.print("\r\n");
+                        Printer.BufferedWrite("\r\n");
                     }
                 }
 
@@ -117,24 +119,32 @@ class OCRRecorder extends Recorder {
                 NativeKeyListener.super.nativeKeyTyped(nativeEvent);
 //                System.out.println("Key Released: " + NativeKeyEvent.getKeyText(nativeEvent.getKeyCode()));
 //                System.out.println(nativeEvent.getKeyCode());
+//                System.out.println(running);
                 if (running && nativeEvent.getKeyCode() == 3639) {
                     var file = new File(FileManager.getDictionaryPath("OCR") + "\\" + System.currentTimeMillis() + ".png");
 
                     Cmder.executeCmdCommand("D:\\Snipaste\\Snipaste.exe snip -o " + file.getAbsolutePath());
 
-                    while (!file.exists() && running) {
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                    try {
-                        OCR(file);
 
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    new Thread("ocr") {
+                        @Override
+                        public void run() {
+                            while (!file.exists() && running) {
+                                try {
+                                    Thread.sleep(100);
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            try {
+                                OCR(file);
+
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+
+                        }
+                    }.start();
 
 
                 }
@@ -196,7 +206,7 @@ class OCRRecorder extends Recorder {
     public void endRecord() throws Exception {
         logger.info("OCRRecord end");
         running = false;
-        GlobalScreen.unregisterNativeHook();
+//        GlobalScreen.unregisterNativeHook();
     }
 
 

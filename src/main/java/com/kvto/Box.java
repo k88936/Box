@@ -6,6 +6,8 @@ import com.google.common.io.Files;
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -72,7 +74,7 @@ public class Box extends JFrame {
     private void initComponents() {
 
         LOG = new JTextArea();
-        LOG.setText("Box 1.0 \t\t\t\t\t\t\t\t\t\t" + new Date());
+        LOG.setText("Box 1.0 \t\t\t\t\t\t" + new Date());
         LOG.setEditable(false);
         LOG.setLineWrap(true);
         LOG.setBackground(new Color(32, 32, 32));
@@ -274,18 +276,24 @@ public class Box extends JFrame {
         JCheckBox checkbox41 = new JCheckBox(OFF);
         checkbox41.setSelected(false);
 
-        checkbox41.addItemListener(e -> {
-            Dimension LastSize = this.size;
-            if (checkbox41.isSelected()) {
-                checkbox41.setText(ON);
-                this.setAlwaysOnTop(true);
-                this.setSize(800, 250);
-                LastSize = this.getSize();
+        checkbox41.addItemListener(new ItemListener() {
+            Dimension LastSize = Box.this.size;
 
-            } else {
-                checkbox41.setText(OFF);
-                this.setAlwaysOnTop(false);
-                this.setSize(LastSize);
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+
+                if (checkbox41.isSelected()) {
+                    LastSize = Box.this.getSize();
+                    checkbox41.setText(ON);
+                    Box.this.setAlwaysOnTop(true);
+                    Box.this.setSize(800, 250);
+
+
+                } else {
+                    checkbox41.setText(OFF);
+                    Box.this.setAlwaysOnTop(false);
+                    Box.this.setSize(LastSize);
+                }
             }
         });
 
